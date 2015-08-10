@@ -9,6 +9,12 @@
  */
 function leeds_classification_install()
 {
+// Add Leeds Classification credit page
+    $typecheck = node_type_load('page'); // verify that "page" node type exists
+    if (isset($typecheck->name)) {
+        include_once "includes/leeds_node.inc";
+    }
+
     $vocabulary = 'Leeds Classification'; // Vocabulary Name
     $vocabulary_machine = 'leeds_classification'; // Vocabulary machine name to add
     $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine);
