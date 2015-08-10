@@ -1,0 +1,207 @@
+<?php
+/**
+ * @file
+ * Install Leeds Classification Vocabulary and Terms
+ */
+
+/**
+ * Implements hook_install().
+ */
+function leeds_classification_install()
+{
+    $vocabulary = 'Leeds Classification'; // Vocabulary Name
+    $vocabulary_machine = 'leeds_classification'; // Vocabulary machine name to add
+    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine);
+    if (!isset($vocab->vid)) { // If taxonomy doesn't exist.
+        // Add taxonomy
+        taxonomy_vocabulary_save((object)array(
+            'name' => $vocabulary,
+            'machine_name' => $vocabulary_machine,
+        ));
+        variable_set('pathauto_taxonomy_term_leeds_classification_pattern', '[term:parent:url:path]/[term:name]');
+    }
+
+// create all the fields we are adding to our content type
+    foreach (_leeds_classification_installed_fields() as $field) {
+        field_create_field($field);
+    }
+
+// create all the instances for our fields
+    foreach (_leeds_classification_installed_instances() as $instance) {
+        field_create_instance($instance);
+    }
+
+    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine); // Get vid of new Vocabulary
+    $vid = $vocab->vid; // New Vocabulary ID
+
+    include_once "includes/leeds_classification_terms.inc"; // this will include Terms Array
+
+      foreach ($terms as $key => $value) {
+
+          $term = new stdClass();
+          $term->name = $value['name'];
+          $term->description = $value['description'];
+          $term->vid = $value['vid'];
+          if($value['abbr'] != '') {
+              $term->field_leeds_key['und'][0]['value'] = $value['abbr'];
+          }
+          else {$term->field_leeds_key = NULL;}
+          $parent_name = $value['parent'];
+
+          if($parent_name != NULL) {
+              $parent = taxonomy_get_term_by_name($parent_name, $vocabulary_machine);
+              if (!empty($parent)) {
+                  $parent = array_values($parent);
+                  $term->parent = $parent[0]->tid;
+              }
+              else {$term->parent = NULL;}
+          }
+          $term->weight = $value['weight'];
+          taxonomy_term_save($term);
+      }
+
+
+}
+/**
+ * Implements custom function installed_fields().
+ */
+function _leeds_classification_installed_fields()
+{
+    return array(
+// Insert exported Fields
+// FIELD: field_leeds_key
+        'field_leeds_key' => array(
+            'translatable' => '0',
+            'entity_types' => array(),
+            'settings' => array(
+                'max_length' => '64',
+            ),
+            'storage' => array(
+                'type' => 'field_sql_storage',
+                'settings' => array(),
+                'module' => 'field_sql_storage',
+                'active' => '1',
+                'details' => array(
+                    'sql' => array(
+                        'FIELD_LOAD_CURRENT' => array(
+                            'field_data_field_leeds_key' => array(
+                                'value' => 'field_leeds_key_value',
+                                'format' => 'field_leeds_key_format',
+                            ),
+                        ),
+                        'FIELD_LOAD_REVISION' => array(
+                            'field_revision_field_leeds_key' => array(
+                                'value' => 'field_leeds_key_value',
+                                'format' => 'field_leeds_key_format',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'foreign keys' => array(
+                'format' => array(
+                    'table' => 'filter_format',
+                    'columns' => array(
+                        'format' => 'format',
+                    ),
+                ),
+            ),
+            'indexes' => array(
+                'format' => array(
+                    'format',
+                ),
+            ),
+            'field_name' => 'field_leeds_key',
+            'type' => 'text',
+            'module' => 'text',
+            'active' => '1',
+            'locked' => '0',
+            'cardinality' => '-1',
+            'deleted' => '0',
+            'columns' => array(
+                'value' => array(
+                    'type' => 'varchar',
+                    'length' => '64',
+                    'not null' => FALSE,
+                ),
+                'format' => array(
+                    'type' => 'varchar',
+                    'length' => 255,
+                    'not null' => FALSE,
+                ),
+            ),
+            'bundles' => array(
+                'taxonomy_term' => array(
+                    'leeds_classification',
+                ),
+            ),
+        ),
+// End of Fields
+    );
+}
+
+/**
+ * Implements custom function installed_instances().
+ */
+function _leeds_classification_installed_instances()
+{
+    return array(
+// Insert exported Instances
+// INSTANCE: field_leeds_key
+        'field_leeds_key' => array(
+            'label' => 'Alternate Names or Keywords',
+            'widget' => array(
+                'weight' => '1',
+                'type' => 'text_textfield',
+                'module' => 'text',
+                'active' => 1,
+                'settings' => array(
+                    'size' => '60',
+                ),
+            ),
+            'settings' => array(
+                'text_processing' => '0',
+                'linkit' => array(
+                    'enable' => 0,
+                    'profile' => '',
+                    'button_text' => 'Search',
+                ),
+                'user_register_form' => FALSE,
+            ),
+            'display' => array(
+                'default' => array(
+                    'label' => 'inline',
+                    'type' => 'text_default',
+                    'settings' => array(),
+                    'module' => 'text',
+                    'weight' => -1,
+                ),
+                'full' => array(
+                    'label' => 'inline',
+                    'type' => 'text_default',
+                    'settings' => array(),
+                    'module' => 'text',
+                    'weight' => -1,
+                ),
+            ),
+            'required' => 0,
+            'description' => '',
+            'default_value' => NULL,
+            'field_name' => 'field_leeds_key',
+            'entity_type' => 'taxonomy_term',
+            'bundle' => 'leeds_classification',
+            'deleted' => '0',
+        ),
+// End of Instances
+    );
+}
+function leeds_classification_uninstall()
+{
+   $vocabulary_machine = 'leeds_classification'; // Vocabulary machine name to remove
+    // Uninstall Vocabulary
+        $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine);
+    if (isset($vocab->vid)) { // If taxonomy exists.
+        taxonomy_vocabulary_delete($vocab->vid); // Delete Vocabulary
+    }
+
+}
