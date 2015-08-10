@@ -8,7 +8,7 @@
 $terms = array( // Term Array
     'Process Equipment - Physical' => array(
         'name' => 'Process Equipment - Physical',
-        'description' => '',
+        'description' => 'This covers equipment which produces a sample or specimen through physical or mechanical means or through chemical routes, but excluding biochemical and biomolecular processes.',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
@@ -416,7 +416,7 @@ $terms = array( // Term Array
     ),
     'Process Equipment - Biological' => array(
         'name' => 'Process Equipment - Biological',
-        'description' => '',
+        'description' => 'This covers equipment that produces a sample, material or specimen through biological means, and associated non-biological techniques to refine and isolate.',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
@@ -664,7 +664,7 @@ $terms = array( // Term Array
     ),
     'Materials Characterisation' => array(
         'name' => 'Materials Characterisation',
-        'description' => '',
+        'description' => ' This class describes equipment that provides generic techniques to characterize samples, materials or specimens. The defining characteristic is that these items of equipment could equally be applied to a portion of the sample or specimen as to the whole.',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
@@ -1343,9 +1343,9 @@ $terms = array( // Term Array
         'parent' => 'Surface Probe Microscopy',
         'weight' => '0',
     ),
-    'Sample Measurement / Analysis' => array(
-        'name' => 'Sample Measurement / Analysis',
-        'description' => '',
+    'Sample Measurement and Analysis' => array(
+        'name' => 'Sample Measurement and Analysis',
+        'description' => 'Equipment in this class carries out specific measurements and analysis techniques on samples and specimens. The differentiating characteristic of equipment in this class, compared to the Materials Characterization class, is that it is a complete or whole sample or specimen that is used.',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
@@ -1356,7 +1356,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Audio' => array(
@@ -1396,7 +1396,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Cardiovascular' => array(
@@ -1460,7 +1460,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     '1.4K' => array(
@@ -1508,7 +1508,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'High Voltage' => array(
@@ -1524,7 +1524,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Data Acquisition' => array(
@@ -1580,7 +1580,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Gases' => array(
@@ -1644,7 +1644,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Pulsed Magnet' => array(
@@ -1668,7 +1668,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Characterisation (Laser)' => array(
@@ -1732,7 +1732,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Fluid' => array(
@@ -1780,7 +1780,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Bolometric' => array(
@@ -1836,7 +1836,7 @@ $terms = array( // Term Array
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Sample Measurement / Analysis',
+        'parent' => 'Sample Measurement and Analysis',
         'weight' => '0',
     ),
     'Arrays' => array(
@@ -1873,7 +1873,7 @@ $terms = array( // Term Array
     ),
     'Large Scale Instruments' => array(
         'name' => 'Large Scale Instruments',
-        'description' => '',
+        'description' => 'This is a specialized class that is used to describe the small number of items of equipment that have unique functionality, or are comprised of many smaller units that themselves are significant items of inventory but could not be used separately.',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
@@ -1961,7 +1961,7 @@ $terms = array( // Term Array
     ),
     'Infrastructure' => array(
         'name' => 'Infrastructure',
-        'description' => '',
+        'description' => 'This class covers all equipment that is not directly used in sample or specimen production and characterization yet which forms a discrete part of the infrastructure of a laboratory (in the way that benching, fume hoods etc do not).',
         'vid' => $vid,
         'abbr' => '',
         'parent' => NULL,
