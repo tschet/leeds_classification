@@ -124,8 +124,10 @@ function leeds_classification_views_default_views() {
         'leeds_classification' => 'leeds_classification',
     );
 
-    /* Display: Full */
-    $handler = $view->new_display('panel_pane', 'Full', 'panel_pane_1');
+    /* Display: Full List */
+    $handler = $view->new_display('panel_pane', 'Full List', 'panel_pane_1');
+    $handler->display->display_options['pane_category']['name'] = 'Leeds';
+    $handler->display->display_options['pane_category']['weight'] = '0';
     $handler->display->display_options['argument_input'] = array(
         'term_node_tid_depth' => array(
             'type' => 'user',

@@ -8,6 +8,7 @@
  * Implements hook_install().
  */
 function leeds_classification_panels_install() {
+    // Set default variables.
     variable_set('page_manager_term_view_disabled','0');
 
     }
@@ -17,6 +18,5 @@ function leeds_classification_panels_install() {
  */
 
 function leeds_classification_panels_uninstall() {
-    variable_set('page_manager_term_view_disabled','1');
-
+    //remove variables
 }
