@@ -14,9 +14,9 @@ function leeds_classification_panels_views_default_views() {
     $view = new view();
     $view->name = 'leeds_taxonomy_term';
     $view->description = 'Emulates Drupal core\'s handling of taxonomy terms.';
-    $view->tag = 'default';
+    $view->tag = 'Leeds Classification';
     $view->base_table = 'node';
-    $view->human_name = 'Taxonomy term';
+    $view->human_name = 'Leeds Taxonomy term';
     $view->core = 7;
     $view->api_version = '3.0';
     $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -91,9 +91,9 @@ function leeds_classification_panels_views_default_views() {
     $view = new view();
     $view->name = 'leeds_term_children';
     $view->description = '';
-    $view->tag = 'default';
+    $view->tag = 'Leeds Classification';
     $view->base_table = 'taxonomy_term_data';
-    $view->human_name = 'Term Children';
+    $view->human_name = 'Leeds Term Children';
     $view->core = 7;
     $view->api_version = '3.0';
     $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
