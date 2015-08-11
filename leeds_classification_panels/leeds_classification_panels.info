@@ -1,0 +1,10 @@
+name = Leeds Classification Panels & Views
+description = Panels and Views for Leeds Classification Taxonomy
+package = Leeds Classification
+core = 7.x
+dependencies[] = leeds_classification
+dependencies[] = strongarm
+dependencies[] = page_manager
+
+project = leeds_classification
+version = "7.x-1.0"

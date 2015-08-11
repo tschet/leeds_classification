@@ -22,10 +22,10 @@ $customNode->body['und'][0]['format'] = 'filtered_html';
 $customNode->menu['enabled'] = 1;       // 1 to enable providing a link in main menu
 $customNode->menu['link_title'] = 'Leeds Classification';
 $customNode->menu['description'] = '';
-$customNode->menu['parent'] = 'main-menu:0';
+$customNode->menu['parent'] = 'main-menu:classifications';
 $customNode->menu['weight'] = 5;
 
-$customNode->path['alias'] = 'leeds-classifications';
+$customNode->path['alias'] = 'classifications/leeds-classifications';
 
 node_submit($customNode);
 node_save($customNode);

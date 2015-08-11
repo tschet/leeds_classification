@@ -1,7 +1,9 @@
 name = Leeds Classification
 description = Equipment Inventory Classification system developed by the University of Leeds
-package = Riven Design
+package = Leeds Classification
 core = 7.x
+dependencies[] = semanticviews
 dependencies[] = taxonomy
 
+project = leeds_classification
 version = "7.x-1.0"

@@ -5,3 +5,12 @@
  * Date: 8/6/15
  * Time: 4:36 PM
  */
+
+/**
+ * Implements hook_views_api().
+ */
+function leeds_classification_views_api($module, $api) {
+    if ($module == 'views' && $api == 'views_default') {
+        return array('version' => 2);
+    }
+}

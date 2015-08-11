@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Install Panels and Views for Leeds Classification Vocabulary and Terms
+ */
+
+/**
+ * Implements hook_install().
+ */
+function leeds_classification_panels_install() {
+    variable_set('page_manager_term_view_disabled','0');
+
+    }
+
+/**
+ * Implements hook_uninstall().
+ */
+
+function leeds_classification_panels_uninstall() {
+    variable_set('page_manager_term_view_disabled','1');
+
+}
