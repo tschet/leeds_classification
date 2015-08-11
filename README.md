@@ -1,4 +1,4 @@
-# leeds_classification
+# Leeds Equipment Classification
 This is a Drupal 7 module that installs a variation of the Leeds Equipment Classification system (http://ris.leeds.ac.uk/info/31/research_equipment_and_infrastructure/162/equipment_classification) . All credit for the system goes to the team at Leeds. All mistakes in this usage of the system are mine.
 
 I have kept changes to the classificaiton terms to a minimum. For organizational and development purposes, I have made duplicate classification term names unique. In most cases I appended the parent term name, or a portion of it) to the term to make it unique. For instance, ther term "Electrical" was a child term of "Imaging", but was not unique. In order to differentiate the "Imaging / Electrical" term from "Sample Measurement/Electrical". I changed the name to "Electrical (Imaging)". 
