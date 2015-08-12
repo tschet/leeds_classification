@@ -1200,11 +1200,11 @@ $terms = array( // Term Array
         'weight' => '0',
     ),
     'X-ray (Spectrometry)' => array(
-        'name' => 'X-ray',
+        'name' => 'X-ray (Spectrometry)',
         'description' => '',
         'vid' => $vid,
         'abbr' => '',
-        'parent' => 'Spectrometry (Spectrometry)',
+        'parent' => 'Spectrometry',
         'weight' => '0',
     ),
     'Spectroscopy' => array(
