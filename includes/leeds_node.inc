@@ -18,6 +18,7 @@ $customNode->title = 'Leeds Classifications';
 $customNode->body['und'][0]['value'] = '<p>This site is utilizing the <a href="http://ris.leeds.ac.uk/info/31/research_equipment_and_infrastructure/162/equipment_classification">Leeds Equipment Classification system</a> developed at the <a href="http://www.leeds.ac.uk/">University of Leeds</a>.</p>';
 $customNode->body['und'][0]['summary'] = '';
 $customNode->body['und'][0]['format'] = 'filtered_html';
+$customNode->language = 'en';
 
 $customNode->menu['enabled'] = 1;       // 1 to enable providing a link in main menu
 $customNode->menu['link_title'] = 'Leeds Classification';
