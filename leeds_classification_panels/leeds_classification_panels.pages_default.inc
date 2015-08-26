@@ -24,7 +24,7 @@ function leeds_classification_panels_default_page_manager_handlers() {
         'no_blocks' => 0,
         'pipeline' => 'standard',
         'body_classes_to_remove' => '',
-        'body_classes_to_add' => '',
+        'body_classes_to_add' => 'classification-term',
         'css_id' => '',
         'css' => '',
         'contexts' => array(),
