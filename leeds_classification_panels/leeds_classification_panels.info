@@ -8,3 +8,5 @@ dependencies[] = page_manager
 
 project = leeds_classification
 version = "7.x-1.0"
+
+scripts[] = js/leeds-classification-panels.js
