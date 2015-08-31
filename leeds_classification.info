@@ -7,3 +7,6 @@ dependencies[] = taxonomy
 
 project = leeds_classification
 version = "7.x-1.0"
+
+stylesheets[all][] = css/leeds-classification.css
+scripts[] = js/leeds-classification.js

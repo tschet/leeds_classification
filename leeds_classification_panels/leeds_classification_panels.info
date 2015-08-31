@@ -9,4 +9,5 @@ dependencies[] = page_manager
 project = leeds_classification
 version = "7.x-1.0"
 
+stylesheets[all][] = css/leeds-classification-panels.css
 scripts[] = js/leeds-classification-panels.js

@@ -12,6 +12,156 @@ function leeds_classification_panels_views_default_views() {
     $views = array();
 
     $view = new view();
+    $view->name = 'leeds_classification_lists';
+    $view->description = '';
+    $view->tag = 'Leeds Classification';
+    $view->base_table = 'taxonomy_term_data';
+    $view->human_name = 'Leeds Classification Lists';
+    $view->core = 7;
+    $view->api_version = '3.0';
+    $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+    /* Display: Master */
+    $handler = $view->new_display('default', 'Master', 'default');
+    $handler->display->display_options['title'] = 'Equipment Classifications';
+    $handler->display->display_options['css_class'] = 'menu-list';
+    $handler->display->display_options['use_more_always'] = FALSE;
+    $handler->display->display_options['group_by'] = TRUE;
+    $handler->display->display_options['access']['type'] = 'perm';
+    $handler->display->display_options['cache']['type'] = 'none';
+    $handler->display->display_options['query']['type'] = 'views_query';
+    $handler->display->display_options['exposed_form']['type'] = 'basic';
+    $handler->display->display_options['pager']['type'] = 'none';
+    $handler->display->display_options['style_plugin'] = 'list';
+    $handler->display->display_options['style_options']['grouping'] = array(
+        0 => array(
+            'field' => 'name_1',
+            'rendered' => 1,
+            'rendered_strip' => 0,
+        ),
+        1 => array(
+            'field' => 'name',
+            'rendered' => 1,
+            'rendered_strip' => 0,
+        ),
+    );
+    $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+    $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+    $handler->display->display_options['row_plugin'] = 'semanticviews_fields';
+    $handler->display->display_options['row_options']['skip_blank'] = 1;
+    $handler->display->display_options['row_options']['semantic_html'] = array(
+        'name_2' => array(
+            'element_type' => 'span',
+            'class' => 'term-name',
+        ),
+        'title' => array(
+            'element_type' => 'span',
+            'class' => 'node-count',
+        ),
+    );
+    /* No results behavior: Global: Text area */
+    $handler->display->display_options['empty']['area']['id'] = 'area';
+    $handler->display->display_options['empty']['area']['table'] = 'views';
+    $handler->display->display_options['empty']['area']['field'] = 'area';
+    $handler->display->display_options['empty']['area']['empty'] = TRUE;
+    $handler->display->display_options['empty']['area']['content'] = 'Broken?';
+    $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+    /* Relationship: Middle */
+    $handler->display->display_options['relationships']['parent']['id'] = 'parent';
+    $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
+    $handler->display->display_options['relationships']['parent']['field'] = 'parent';
+    $handler->display->display_options['relationships']['parent']['ui_name'] = 'Middle';
+    $handler->display->display_options['relationships']['parent']['label'] = 'middle';
+    $handler->display->display_options['relationships']['parent']['required'] = TRUE;
+    /* Relationship: Top */
+    $handler->display->display_options['relationships']['parent_1']['id'] = 'parent_1';
+    $handler->display->display_options['relationships']['parent_1']['table'] = 'taxonomy_term_hierarchy';
+    $handler->display->display_options['relationships']['parent_1']['field'] = 'parent';
+    $handler->display->display_options['relationships']['parent_1']['relationship'] = 'parent';
+    $handler->display->display_options['relationships']['parent_1']['ui_name'] = 'Top';
+    $handler->display->display_options['relationships']['parent_1']['label'] = 'top';
+    $handler->display->display_options['relationships']['parent_1']['required'] = TRUE;
+    /* Relationship: Taxonomy term: Content with term */
+    $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+    $handler->display->display_options['relationships']['nid']['table'] = 'taxonomy_index';
+    $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+    /* Field: Top Level */
+    $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
+    $handler->display->display_options['fields']['name_1']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['fields']['name_1']['field'] = 'name';
+    $handler->display->display_options['fields']['name_1']['relationship'] = 'parent_1';
+    $handler->display->display_options['fields']['name_1']['ui_name'] = 'Top Level';
+    $handler->display->display_options['fields']['name_1']['label'] = '';
+    $handler->display->display_options['fields']['name_1']['exclude'] = TRUE;
+    $handler->display->display_options['fields']['name_1']['element_label_colon'] = FALSE;
+    /* Field: Middle Level */
+    $handler->display->display_options['fields']['name']['id'] = 'name';
+    $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['fields']['name']['field'] = 'name';
+    $handler->display->display_options['fields']['name']['relationship'] = 'parent';
+    $handler->display->display_options['fields']['name']['ui_name'] = 'Middle Level';
+    $handler->display->display_options['fields']['name']['label'] = '';
+    $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+    $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
+    $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+    $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+    /* Field: Bottom Level */
+    $handler->display->display_options['fields']['name_2']['id'] = 'name_2';
+    $handler->display->display_options['fields']['name_2']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['fields']['name_2']['field'] = 'name';
+    $handler->display->display_options['fields']['name_2']['ui_name'] = 'Bottom Level';
+    $handler->display->display_options['fields']['name_2']['label'] = '';
+    $handler->display->display_options['fields']['name_2']['element_label_colon'] = FALSE;
+    $handler->display->display_options['fields']['name_2']['link_to_taxonomy'] = TRUE;
+    /* Field: COUNT(Content: Title) */
+    $handler->display->display_options['fields']['title']['id'] = 'title';
+    $handler->display->display_options['fields']['title']['table'] = 'node';
+    $handler->display->display_options['fields']['title']['field'] = 'title';
+    $handler->display->display_options['fields']['title']['relationship'] = 'nid';
+    $handler->display->display_options['fields']['title']['group_type'] = 'count';
+    $handler->display->display_options['fields']['title']['label'] = '';
+    $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+    $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
+    $handler->display->display_options['fields']['title']['empty_zero'] = TRUE;
+    $handler->display->display_options['fields']['title']['prefix'] = ' (';
+    $handler->display->display_options['fields']['title']['suffix'] = ')';
+    /* Sort criterion: Taxonomy term: Weight */
+    $handler->display->display_options['sorts']['weight']['id'] = 'weight';
+    $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['sorts']['weight']['field'] = 'weight';
+    /* Sort criterion: Taxonomy term: Weight */
+    $handler->display->display_options['sorts']['weight_1']['id'] = 'weight_1';
+    $handler->display->display_options['sorts']['weight_1']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['sorts']['weight_1']['field'] = 'weight';
+    $handler->display->display_options['sorts']['weight_1']['relationship'] = 'parent';
+    /* Sort criterion: Taxonomy term: Weight */
+    $handler->display->display_options['sorts']['weight_2']['id'] = 'weight_2';
+    $handler->display->display_options['sorts']['weight_2']['table'] = 'taxonomy_term_data';
+    $handler->display->display_options['sorts']['weight_2']['field'] = 'weight';
+    $handler->display->display_options['sorts']['weight_2']['relationship'] = 'parent_1';
+    /* Filter criterion: Taxonomy vocabulary: Machine name */
+    $handler->display->display_options['filters']['machine_name']['id'] = 'machine_name';
+    $handler->display->display_options['filters']['machine_name']['table'] = 'taxonomy_vocabulary';
+    $handler->display->display_options['filters']['machine_name']['field'] = 'machine_name';
+    $handler->display->display_options['filters']['machine_name']['value'] = array(
+        'leeds_classification' => 'leeds_classification',
+    );
+
+    /* Display: Pane */
+    $handler = $view->new_display('panel_pane', 'Pane', 'panel_pane_1');
+    $handler->display->display_options['argument_input'] = array(
+        'term_node_tid_depth' => array(
+            'type' => 'user',
+            'context' => 'entity:file.field_file_image_alt_text',
+            'context_optional' => 0,
+            'panel' => '0',
+            'fixed' => '',
+            'label' => 'Content: Has taxonomy term ID (with depth)',
+        ),
+    );
+    $views['leeds_classification_lists'] = $view;
+
+    $view = new view();
     $view->name = 'leeds_inventory';
     $view->description = '';
     $view->tag = 'Leeds Classification';
@@ -47,8 +197,9 @@ function leeds_classification_panels_views_default_views() {
     $handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
     $handler->display->display_options['relationships']['term_node_tid']['required'] = TRUE;
     $handler->display->display_options['relationships']['term_node_tid']['vocabularies'] = array(
-        'college_department' => 'college_department',
-        'equipment_classification' => 'equipment_classification',
+        'leeds_classification' => 'leeds_classification',
+        'departments' => 0,
+        'tags' => 0,
     );
     /* Field: Content: Rendered Node */
     $handler->display->display_options['fields']['rendered_entity']['id'] = 'rendered_entity';
@@ -81,13 +232,6 @@ function leeds_classification_panels_views_default_views() {
     $handler->display->display_options['filters']['status']['value'] = 1;
     $handler->display->display_options['filters']['status']['group'] = 1;
     $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-    /* Filter criterion: Content: Type */
-    $handler->display->display_options['filters']['type']['id'] = 'type';
-    $handler->display->display_options['filters']['type']['table'] = 'node';
-    $handler->display->display_options['filters']['type']['field'] = 'type';
-    $handler->display->display_options['filters']['type']['value'] = array(
-        'rtp_inventory' => 'rtp_inventory',
-    );
 
     /* Display: Content pane */
     $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
@@ -113,6 +257,127 @@ function leeds_classification_panels_views_default_views() {
         ),
     );
     $views['leeds_inventory'] = $view;
+
+    $view = new view();
+    $view->name = 'leeds_recent_inventory';
+    $view->description = '';
+    $view->tag = 'Leeds Classification';
+    $view->base_table = 'node';
+    $view->human_name = 'Leeds Recent Inventory';
+    $view->core = 7;
+    $view->api_version = '3.0';
+    $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+    /* Display: Master */
+    $handler = $view->new_display('default', 'Master', 'default');
+    $handler->display->display_options['title'] = 'Recently Added Inventory Items';
+    $handler->display->display_options['use_more'] = TRUE;
+    $handler->display->display_options['use_more_always'] = FALSE;
+    $handler->display->display_options['use_more_text'] = 'All Inventory';
+    $handler->display->display_options['link_display'] = 'custom_url';
+    $handler->display->display_options['access']['type'] = 'perm';
+    $handler->display->display_options['cache']['type'] = 'none';
+    $handler->display->display_options['query']['type'] = 'views_query';
+    $handler->display->display_options['query']['options']['distinct'] = TRUE;
+    $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+    $handler->display->display_options['exposed_form']['type'] = 'basic';
+    $handler->display->display_options['pager']['type'] = 'some';
+    $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+    $handler->display->display_options['pager']['options']['offset'] = '0';
+    $handler->display->display_options['style_plugin'] = 'semanticviews_default';
+    $handler->display->display_options['style_options']['row']['class'] = 'leeds-recent item-row';
+    $handler->display->display_options['row_plugin'] = 'semanticviews_fields';
+    $handler->display->display_options['row_options']['skip_blank'] = 1;
+    $handler->display->display_options['row_options']['semantic_html'] = array(
+        'created' => array(
+            'element_type' => 'div',
+            'class' => 'recent-post-date',
+            'label_element_type' => 'span',
+            'label_class' => 'label-inline',
+        ),
+        'title' => array(
+            'element_type' => 'h3',
+            'class' => '',
+        ),
+        'field_rei_classification' => array(
+            'element_type' => 'div',
+            'class' => 'classification field-inline',
+            'label_element_type' => 'label',
+            'label_class' => 'above',
+        ),
+    );
+    /* Relationship: Content: Inventory Classification (field_rei_classification) */
+    $handler->display->display_options['relationships']['field_rei_classification_tid']['id'] = 'field_rei_classification_tid';
+    $handler->display->display_options['relationships']['field_rei_classification_tid']['table'] = 'field_data_field_rei_classification';
+    $handler->display->display_options['relationships']['field_rei_classification_tid']['field'] = 'field_rei_classification_tid';
+    $handler->display->display_options['relationships']['field_rei_classification_tid']['required'] = TRUE;
+    /* Field: Content: Post date */
+    $handler->display->display_options['fields']['created']['id'] = 'created';
+    $handler->display->display_options['fields']['created']['table'] = 'node';
+    $handler->display->display_options['fields']['created']['field'] = 'created';
+    $handler->display->display_options['fields']['created']['label'] = '';
+    $handler->display->display_options['fields']['created']['alter']['alter_text'] = TRUE;
+    $handler->display->display_options['fields']['created']['alter']['text'] = 'Added [created]';
+    $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+    $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+    $handler->display->display_options['fields']['created']['custom_date_format'] = 'F j, Y';
+    $handler->display->display_options['fields']['created']['second_date_format'] = 'riven_basemodules_date_format_day_name';
+    /* Field: Content: Title */
+    $handler->display->display_options['fields']['title']['id'] = 'title';
+    $handler->display->display_options['fields']['title']['table'] = 'node';
+    $handler->display->display_options['fields']['title']['field'] = 'title';
+    $handler->display->display_options['fields']['title']['label'] = '';
+    $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+    /* Field: Content: Inventory Classification */
+    $handler->display->display_options['fields']['field_rei_classification']['id'] = 'field_rei_classification';
+    $handler->display->display_options['fields']['field_rei_classification']['table'] = 'field_data_field_rei_classification';
+    $handler->display->display_options['fields']['field_rei_classification']['field'] = 'field_rei_classification';
+    $handler->display->display_options['fields']['field_rei_classification']['element_label_colon'] = FALSE;
+    $handler->display->display_options['fields']['field_rei_classification']['type'] = 'shs_default';
+    $handler->display->display_options['fields']['field_rei_classification']['settings'] = array(
+        'linked' => 0,
+    );
+    $handler->display->display_options['fields']['field_rei_classification']['delta_offset'] = '0';
+    $handler->display->display_options['fields']['field_rei_classification']['separator'] = ' ';
+    $handler->display->display_options['fields']['field_rei_classification']['field_api_classes'] = TRUE;
+    /* Sort criterion: Content: Post date */
+    $handler->display->display_options['sorts']['created']['id'] = 'created';
+    $handler->display->display_options['sorts']['created']['table'] = 'node';
+    $handler->display->display_options['sorts']['created']['field'] = 'created';
+    $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+    /* Filter criterion: Content: Published */
+    $handler->display->display_options['filters']['status']['id'] = 'status';
+    $handler->display->display_options['filters']['status']['table'] = 'node';
+    $handler->display->display_options['filters']['status']['field'] = 'status';
+    $handler->display->display_options['filters']['status']['value'] = 1;
+    $handler->display->display_options['filters']['status']['group'] = 1;
+    $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+    /* Display: Recent Inventory */
+    $handler = $view->new_display('panel_pane', 'Recent Inventory', 'panel_pane_1');
+    $handler->display->display_options['link_url'] = 'inventory';
+    $handler->display->display_options['pane_category']['name'] = 'Leeds';
+    $handler->display->display_options['pane_category']['weight'] = '0';
+    $handler->display->display_options['allow']['use_pager'] = 0;
+    $handler->display->display_options['allow']['items_per_page'] = 0;
+    $handler->display->display_options['allow']['offset'] = 0;
+    $handler->display->display_options['allow']['link_to_view'] = 0;
+    $handler->display->display_options['allow']['more_link'] = 0;
+    $handler->display->display_options['allow']['path_override'] = 0;
+    $handler->display->display_options['allow']['title_override'] = 'title_override';
+    $handler->display->display_options['allow']['exposed_form'] = 0;
+    $handler->display->display_options['allow']['fields_override'] = 0;
+    $handler->display->display_options['argument_input'] = array(
+        'term_node_tid_depth' => array(
+            'type' => 'user',
+            'context' => 'entity:file.field_file_image_alt_text',
+            'context_optional' => 0,
+            'panel' => '0',
+            'fixed' => '',
+            'label' => 'Content: Has taxonomy term ID (with depth)',
+        ),
+    );
+    $views['leeds_recent_inventory'] = $view;
 
     $view = new view();
     $view->name = 'leeds_term_children';
@@ -154,7 +419,7 @@ function leeds_classification_panels_views_default_views() {
     $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
     $handler->display->display_options['relationships']['parent']['field'] = 'parent';
     $handler->display->display_options['relationships']['parent']['required'] = TRUE;
-    /* Relationship: Taxonomy term: Content using Inventory Classification */
+    /* Relationship: Broken/missing handler */
     $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['id'] = 'reverse_field_ii_classification_node';
     $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['table'] = 'taxonomy_term_data';
     $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['field'] = 'reverse_field_ii_classification_node';

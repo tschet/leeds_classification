@@ -1,0 +1,28 @@
+/* CSS Document */
+div.classification-page h2 {  }
+div.classification-page .item-list h3 {
+    cursor: pointer;
+    margin: 0;
+    text-decoration: underline;}
+div.classification-page h3:hover, div.classification-page h3:active, div.classification-page h3:focus {
+    text-decoration: none;
+}
+div.classification-page .item-list { margin-left: 20px;  }
+.view-leeds-classification-page .view-grouping {
+    margin-bottom: 10px;
+}
+.menu-list #collapse * {
+    cursor: pointer;
+}
+/* first level li */
+#collapse:first-child {
+    font-weight: bold;
+    list-style: none;
+}
+/* second level li */
+#collapse:first-child ul li {
+    font-weight: normal;
+    font-size: .9em;
+}
+
+.open {}
