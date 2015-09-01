@@ -1,0 +1,22 @@
+/* CSS Document */
+.leeds-recent.item-row {
+    border-bottom:2px solid #999;
+    margin-bottom:15px;
+    overflow: hidden;
+    padding-bottom:10px;
+}
+.leeds-recent.item-row + .item-row {
+}
+
+.leeds-recent .recent-post-date {
+    font-style: italic;
+    font-weight: bold;
+    margin:7px 0 4px;
+}
+.leeds-recent h3 {
+    margin-top:0;
+}
+/* Assign float left to pull-left class in case theme is not Bootstrapo based */
+.leeds-recent .pull-left {
+    float: left;
+}
