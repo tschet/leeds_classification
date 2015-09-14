@@ -158,11 +158,12 @@ function leeds_classification_panels_views_default_views() {
             'label_class' => 'above',
         ),
     );
-    /* Relationship: Content: Inventory Classification (field_rei_classification) */
-    $handler->display->display_options['relationships']['field_rei_classification_tid']['id'] = 'field_rei_classification_tid';
-    $handler->display->display_options['relationships']['field_rei_classification_tid']['table'] = 'field_data_field_rei_classification';
-    $handler->display->display_options['relationships']['field_rei_classification_tid']['field'] = 'field_rei_classification_tid';
-    $handler->display->display_options['relationships']['field_rei_classification_tid']['required'] = TRUE;
+    /* Relationship: Taxonomy term: Content with term */
+    $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+    $handler->display->display_options['relationships']['nid']['table'] = 'taxonomy_index';
+    $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+    $handler->display->display_options['relationships']['nid']['relationship'] = 'field_rei_classification_tid';
+    $handler->display->display_options['relationships']['nid']['required'] = TRUE;
     /* Field: Content: Post date */
     $handler->display->display_options['fields']['created']['id'] = 'created';
     $handler->display->display_options['fields']['created']['table'] = 'node';
@@ -282,10 +283,6 @@ function leeds_classification_panels_views_default_views() {
     $handler->display->display_options['relationships']['parent']['table'] = 'taxonomy_term_hierarchy';
     $handler->display->display_options['relationships']['parent']['field'] = 'parent';
     $handler->display->display_options['relationships']['parent']['required'] = TRUE;
-    /* Relationship: Broken/missing handler */
-    $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['id'] = 'reverse_field_ii_classification_node';
-    $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['table'] = 'taxonomy_term_data';
-    $handler->display->display_options['relationships']['reverse_field_ii_classification_node']['field'] = 'reverse_field_ii_classification_node';
     /* Field: Taxonomy term: Name */
     $handler->display->display_options['fields']['name']['id'] = 'name';
     $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
@@ -294,18 +291,6 @@ function leeds_classification_panels_views_default_views() {
     $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
     $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
     $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
-    /* Field: COUNT(DISTINCT Content: Title) */
-    $handler->display->display_options['fields']['title']['id'] = 'title';
-    $handler->display->display_options['fields']['title']['table'] = 'node';
-    $handler->display->display_options['fields']['title']['field'] = 'title';
-    $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_ii_classification_node';
-    $handler->display->display_options['fields']['title']['group_type'] = 'count_distinct';
-    $handler->display->display_options['fields']['title']['label'] = '';
-    $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-    $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
-    $handler->display->display_options['fields']['title']['empty_zero'] = TRUE;
-    $handler->display->display_options['fields']['title']['prefix'] = ' (';
-    $handler->display->display_options['fields']['title']['suffix'] = ')';
     /* Sort criterion: Taxonomy term: Weight */
     $handler->display->display_options['sorts']['weight']['id'] = 'weight';
     $handler->display->display_options['sorts']['weight']['table'] = 'taxonomy_term_data';

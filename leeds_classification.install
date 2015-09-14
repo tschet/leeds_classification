@@ -16,13 +16,13 @@ function leeds_classification_install()
     }
 
     $vocabulary = 'Leeds Classification'; // Vocabulary Name
-    $vocabulary_machine = 'leeds_classification'; // Vocabulary machine name to add
-    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine);
+    $machine = 'leeds_classification'; // Vocabulary machine name to add
+    $vocab = taxonomy_vocabulary_machine_name_load($machine);
     if (!isset($vocab->vid)) { // If taxonomy doesn't exist.
         // Add taxonomy
         taxonomy_vocabulary_save((object)array(
             'name' => $vocabulary,
-            'machine_name' => $vocabulary_machine,
+            'machine_name' => $machine,
         ));
         variable_set('pathauto_taxonomy_term_leeds_classification_pattern', 'classifications/[term:parent:parent:name]/[term:parent:name]/[term:name]');
         variable_set('field_bundle_settings_taxonomy_term__leeds_classification', array(
@@ -62,36 +62,54 @@ function leeds_classification_install()
         field_create_instance($instance);
     }
 
-    $vocab = taxonomy_vocabulary_machine_name_load($vocabulary_machine); // Get vid of new Vocabulary
+    $vocab = taxonomy_vocabulary_machine_name_load($machine); // Get vid of new Vocabulary
     $vid = $vocab->vid; // New Vocabulary ID
 
     include_once "includes/leeds_classification_terms.inc"; // this will include Terms Array
 
-      foreach ($terms as $key => $value) {
+    foreach ($terms as $key => $value) {
 
-          $term = new stdClass();
-          $term->name = $value['name'];
-          $term->description = $value['description'];
-          $term->vid = $value['vid'];
-          if($value['abbr'] != '') {
-              $term->field_leeds_key['und'][0]['value'] = $value['abbr'];
-          }
-          else {$term->field_leeds_key = NULL;}
-          $parent_name = $value['parent'];
+        $term = new stdClass();
+        $term->name = $value['name'];
+        $term->description = $value['description'];
+        $term->field_leeds_unique_name['und'][0]['value'] = $value['unique'];
+        $term->vid = $value['vid'];
+        if ($value['abbr'] != '') {
+            $term->field_leeds_key['und'][0]['value'] = $value['abbr'];
+        } else {
+            $term->field_leeds_key = NULL;
+        }
 
-          if($parent_name != NULL) {
-              $parent = taxonomy_get_term_by_name($parent_name, $vocabulary_machine);
-              if (!empty($parent)) {
-                  $parent = array_values($parent);
-                  $term->parent = $parent[0]->tid;
-              }
-              else {$term->parent = NULL;}
-          }
-          $term->weight = $value['weight'];
-          taxonomy_term_save($term);
+        if ($value['parent'] != NULL) {
+            $parent_name = $value['parent'];
+            if ($parent_name != $term->name) {
+                $query = new EntityFieldQuery();
+                $entities = $query->entityCondition('entity_type', 'taxonomy_term')
+                    ->entityCondition('bundle', $machine)
+                    ->fieldCondition('field_leeds_unique_name', 'value', $parent_name, '=')
+                    ->execute();
+
+                if (!empty($entities['taxonomy_term'])) {
+                    $parent_term = $entities['taxonomy_term'];
+                    $parent_term = key($parent_term);
+                    $term->parent = $parent_term;
+                }
+            }
+            else {
+                $parent = taxonomy_get_term_by_name($parent_name, $machine);
+                if (!empty($parent)) {
+                    $parent = array_values($parent);
+                    $term->parent = $parent[0]->tid;
+                }
+            }
+
+        }
+        else {
+            $term->parent = NULL;
+        }
+        $term->weight = $value['weight'];
+        taxonomy_term_save($term);
       }
-
-
 }
 /**
  * Implements custom function installed_fields().
@@ -167,6 +185,77 @@ function _leeds_classification_installed_fields()
                 ),
             ),
         ),
+
+        // FIELD: field_leeds_unique_name
+        'field_leeds_unique_name' => array(
+            'translatable' => '0',
+            'entity_types' => array(),
+            'settings' => array(
+                'max_length' => '64',
+            ),
+            'storage' => array(
+                'type' => 'field_sql_storage',
+                'settings' => array(),
+                'module' => 'field_sql_storage',
+                'active' => '1',
+                'details' => array(
+                    'sql' => array(
+                        'FIELD_LOAD_CURRENT' => array(
+                            'field_data_field_leeds_unique_name' => array(
+                                'value' => 'field_leeds_unique_name_value',
+                                'format' => 'field_leeds_unique_name_format',
+                            ),
+                        ),
+                        'FIELD_LOAD_REVISION' => array(
+                            'field_revision_field_leeds_unique_name' => array(
+                                'value' => 'field_leeds_unique_name_value',
+                                'format' => 'field_leeds_unique_name_format',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'foreign keys' => array(
+                'format' => array(
+                    'table' => 'filter_format',
+                    'columns' => array(
+                        'format' => 'format',
+                    ),
+                ),
+            ),
+            'indexes' => array(
+                'format' => array(
+                    'format',
+                ),
+            ),
+            'field_name' => 'field_leeds_unique_name',
+            'type' => 'text',
+            'module' => 'text',
+            'active' => '1',
+            'locked' => '0',
+            'cardinality' => '1',
+            'deleted' => '0',
+            'columns' => array(
+                'value' => array(
+                    'type' => 'varchar',
+                    'length' => '64',
+                    'not null' => FALSE,
+                ),
+                'format' => array(
+                    'type' => 'varchar',
+                    'length' => 255,
+                    'not null' => FALSE,
+                ),
+            ),
+            'bundles' => array(
+                'taxonomy_term' => array(
+                    'leeds_classification',
+                ),
+            ),
+        ),
+
+
+
 // End of Fields
     );
 }
@@ -223,6 +312,54 @@ function _leeds_classification_installed_instances()
             'bundle' => 'leeds_classification',
             'deleted' => '0',
         ),
+
+
+// INSTANCE: field_leeds_unique_name
+        'field_leeds_unique_name' => array(
+            'label' => 'Unique Term Name',
+            'widget' => array(
+                'weight' => '31',
+                'type' => 'text_textfield',
+                'module' => 'text',
+                'active' => 1,
+                'settings' => array(
+                    'size' => '60',
+                ),
+            ),
+            'settings' => array(
+                'text_processing' => '0',
+                'linkit' => array(
+                    'enable' => 0,
+                    'profile' => '',
+                    'button_text' => 'Search',
+                ),
+                'user_register_form' => FALSE,
+            ),
+            'display' => array(
+                'default' => array(
+                    'label' => 'inline',
+                    'type' => 'text_default',
+                    'settings' => array(),
+                    'module' => 'text',
+                    'weight' => 0,
+                ),
+                'full' => array(
+                    'type' => 'hidden',
+                    'label' => 'inline',
+                    'settings' => array(),
+                    'weight' => 0,
+                ),
+            ),
+            'required' => 1,
+            'description' => '',
+            'ds_extras_field_template' => '',
+            'default_value' => NULL,
+            'field_name' => 'field_leeds_unique_name',
+            'entity_type' => 'taxonomy_term',
+            'bundle' => 'leeds_classification',
+            'deleted' => '0',
+        ),
+
 // End of Instances
     );
 }

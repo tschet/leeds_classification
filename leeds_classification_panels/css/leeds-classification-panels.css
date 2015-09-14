@@ -20,3 +20,6 @@
 .leeds-recent .pull-left {
     float: left;
 }
+.view-leeds-inventory .view-empty  {
+    margin-top:15px;
+}
