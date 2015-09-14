@@ -1,0 +1,8 @@
+name = Leeds Classification Feeds Importer
+description = Feeds importer: Defines Classification Term GUID for other Feeds Importers to reference
+package = Leeds Classification
+core = 7.x
+
+dependencies[] = feeds
+
+version = "7.x-1.0"

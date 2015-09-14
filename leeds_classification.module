@@ -14,6 +14,16 @@ function leeds_classification_views_api($module, $api) {
         return array('version' => 2);
     }
 }
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function leeds_classification_ctools_plugin_api($module, $api) {
+    if ($module == 'field_validation' && $api == 'default_field_validation_rules') {
+        return array('version' => 2);
+    }
+}
+
 /**
  * Implements hook_theme_registry_alter().
  */
