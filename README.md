@@ -5,7 +5,7 @@ Classification system](http://ris.leeds.ac.uk/info/31/research_equipment_and_inf
 All credit for the system goes to the team at Leeds. All mistakes in this 
 usage of the system are mine.
 
-I have kept changes to the classificaiton terms to a minimum. For organizational 
+I have kept changes to the classification terms to a minimum. For organizational 
 and development purposes, I have made duplicate classification term names unique. 
 In most cases I appended the parent term name, or a portion of it to the term in 
 order to make it unique. For instance, the term "Electrical" was a child term 
@@ -18,8 +18,15 @@ but could easily be used without as well. The REI Entities repository is
 currently private, but will be made public when completed. Ask about it it you 
 want access and it isn't yet public.
 
+https://github.com/tschet/leeds_classification
+
 ## INSTALLATION ##
 Install as usual, see http://drupal.org/node/895232 for further information.
+
+Leeds Classification Panels and Views (leeds_classificaiton_panels) and Leeds 
+Classification Feeds Importer add functionality but are not required. Use as 
+needed. The Feeds Importer module could be activated and deactivated as 
+necessary if desired.
  
 ## CONFIGURATION ##
 There are no specific configuration settings for the Leeds Classification module.
