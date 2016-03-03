@@ -33,7 +33,7 @@ function leeds_classification_feeds_feeds_importer_default() {
         'parser' => array(
             'plugin_key' => 'FeedsCSVParser',
             'config' => array(
-                'delimiter' => ';',
+                'delimiter' => ',',
                 'no_headers' => 0,
             ),
         ),
